@@ -24,7 +24,7 @@ var downloadLink = document.querySelector('a#downloadLink');
 videoElement.controls = false;
 
 function errorCallback(error){
-	console.log('navigator.getUserMedia error: ', error);	
+	console.log('navigator.getUserMedia error: ', error);
 }
 
 /*
@@ -38,7 +38,7 @@ var chunks = [];
 var count = 0;
 
 function startRecording(stream) {
-	log('Start recording...');
+	log('Recording...');
 	if (typeof MediaRecorder.isTypeSupported == 'function'){
 		/*
 			MediaRecorder.isTypeSupported is a function announced in https://developers.google.com/web/updates/2016/01/mediarecorder and later introduced in the MediaRecorder API spec http://www.w3.org/TR/mediastream-recording/
@@ -50,10 +50,10 @@ function startRecording(stream) {
 		} else if (MediaRecorder.isTypeSupported('video/webm;codecs=vp8')) {
 		  var options = {mimeType: 'video/webm;codecs=vp8'};
 		}
-		log('Using '+options.mimeType);
+		// log('Using '+options.mimeType);
 		mediaRecorder = new MediaRecorder(stream, options);
 	}else{
-		log('Using default codecs for browser');
+		// log('Using default codecs for browser');
 		mediaRecorder = new MediaRecorder(stream);
 	}
 
@@ -80,11 +80,11 @@ function startRecording(stream) {
 
 
 	mediaRecorder.onstart = function(){
-		log('Started & state = ' + mediaRecorder.state);
+		// log('Started & state = ' + mediaRecorder.state);
 	};
 
 	mediaRecorder.onstop = function(){
-		log('Stopped  & state = ' + mediaRecorder.state);
+		// log('Stopped  & state = ' + mediaRecorder.state);
 
 		var blob = new Blob(chunks, {type: "video/webm"});
 		chunks = [];
@@ -95,8 +95,8 @@ function startRecording(stream) {
 		videoElement.src = videoURL;
 		downloadLink.innerHTML = 'Download video file';
 
-		var rand =  Math.floor((Math.random() * 10000000));
-		var name  = "video_"+rand+".webm" ;
+		// var rand =  Math.floor((Math.random() * 10000000));
+		var name  = "video.webm" ;
 
 		downloadLink.setAttribute( "download", name);
 		downloadLink.setAttribute( "name", name);
